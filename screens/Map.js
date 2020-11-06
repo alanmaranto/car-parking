@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import MapView from "react-native-maps";
+import { parkings } from "../parkings";
 import { mapStyles } from "../styles/styles";
 
 const Map = () => {
@@ -8,6 +9,25 @@ const Map = () => {
     <View style={mapStyles.header}>
       <Text>Header</Text>
     </View>
+  );
+
+  const renderParkings = () => (
+    <ScrollView
+      pagingEnabled
+      scrollEnabled
+      showsHorizontalScrollIndicator={false}
+      scrollEventThrottle={16}
+      snapToAlignment="center"
+      onScroll={(props) => console.log("hey", props)}
+      style={mapStyles.parkings}
+      horizontal
+    >
+      {parkings.map((parking) => (
+        <View key={`parking-${parking.id}}`} style={mapStyles.parking}>
+          <Text>{parking.title}</Text>
+        </View>
+      ))}
+    </ScrollView>
   );
 
   return (
@@ -22,6 +42,7 @@ const Map = () => {
         }}
         style={mapStyles.map}
       />
+      {renderParkings()}
     </View>
   );
 };
