@@ -26,5 +26,13 @@ export const mapStyles = StyleSheet.create({
     padding: 24,
     marginHorizontal: 12,
     width: width - (24 * 2),
+    flexDirection: "row"
+  },
+  btnBuy: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "red",
+    padding: 12,
+    borderRadius: 6
   }
 });
