@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MapView from "react-native-maps";
 import { parkings } from "../parkings";
@@ -13,89 +19,82 @@ const Map = () => {
     </View>
   );
 
+  const renderParking = (parking) => {
+    return (
+      <View key={`parking-${parking.id}}`} style={mapStyles.parking}>
+        <View style={{ flex: 1, flexDirection: "column" }}>
+          <Text style={{ fontSize: 16 }}>
+            x {parking.spots} {parking.title}
+          </Text>
+        </View>
+        <View style={{ flex: 1.5, flexDirection: "row" }}>
+          <View
+            style={{
+              flex: 0.5,
+              justifyContent: "center",
+              marginHorizontal: 24,
+            }}
+          >
+            <View
+              style={{
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row",
+                flex: 1,
+              }}
+            >
+              <Ionicons name="ios-pricetag" size={16} color="#7D818A" />
+              <Text>${parking.price}</Text>
+            </View>
+            <View
+              style={{
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row",
+                flex: 1,
+              }}
+            >
+              <Ionicons name="ios-star" size={16} color="#7D818A" />
+              <Text>{parking.rating}</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={mapStyles.btnBuy}>
+            <View style={{ flex: 1, justifyContent: "center" }}>
+              <Text style={{ fontSize: 24, color: "white" }}>
+                ${parking.price * hours}
+              </Text>
+              <Text style={{ color: "white" }}>
+                {parking.price}x{hours} hrs
+              </Text>
+            </View>
+            <View
+              style={{
+                flex: 0.5,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 24, color: "white" }}>></Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   const renderParkings = () => (
-    <ScrollView
+    <FlatList
       pagingEnabled
       scrollEnabled
       showsHorizontalScrollIndicator={false}
       scrollEventThrottle={16}
       snapToAlignment="center"
-      //   onScroll={(props) => console.log("hey", props)}
       style={mapStyles.parkings}
       horizontal
-    >
-      {parkings.map((parking) => (
-        <View key={`parking-${parking.id}}`} style={mapStyles.parking}>
-          <View style={{ flex: 1, flexDirection: "column" }}>
-            <Text style={{ fontSize: 16 }}>
-              x {parking.spots} {parking.title}
-            </Text>
-            <View
-              style={{
-                borderWidth: 0.5,
-                borderColor: "grey",
-                borderRadius: 6,
-                padding: 4,
-                width: 100,
-              }}
-            >
-              <Text style={{ fontSize: 16 }}>05:00 hrs</Text>
-            </View>
-          </View>
-          <View style={{ flex: 1.5, flexDirection: "row" }}>
-            <View
-              style={{
-                flex: 0.5,
-                justifyContent: "center",
-                marginHorizontal: 24,
-              }}
-            >
-              <View
-                style={{
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  flex: 1,
-                }}
-              >
-                <Ionicons name="ios-pricetag" size={16} color="#7D818A" />
-                <Text>${parking.price}</Text>
-              </View>
-              <View
-                style={{
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  flex: 1,
-                }}
-              >
-                <Ionicons name="ios-star" size={16} color="#7D818A" />
-                <Text>{parking.rating}</Text>
-              </View>
-            </View>
-            <TouchableOpacity style={mapStyles.btnBuy}>
-              <View style={{ flex: 1, justifyContent: "center" }}>
-                <Text style={{ fontSize: 24, color: "white" }}>
-                  ${parking.price * hours}
-                </Text>
-                <Text style={{ color: "white" }}>
-                  {parking.price}x{hours} hrs
-                </Text>
-              </View>
-              <View
-                style={{
-                  flex: 0.5,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 24, color: "white" }}>></Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ))}
-    </ScrollView>
+      renderItem={({ item }) => renderParking(item)}
+      keyExtractor={(item, index) => `${item.id}`}
+      data={parkings}
+    />
   );
 
   return (
