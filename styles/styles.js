@@ -31,7 +31,7 @@ export const mapStyles = StyleSheet.create({
   btnBuy: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "red",
+    backgroundColor: "#D25260",
     padding: 12,
     borderRadius: 6
   }
