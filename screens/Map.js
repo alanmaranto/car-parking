@@ -8,10 +8,15 @@ import {
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
-import Modal from "react-native-modal";
+import Modal from "../components/Modal";
 import { parkings } from "../parkings";
 import { convertCoordinates } from "../helpers/map";
-import { mapStyles } from "../styles/styles";
+import {
+  mapStyles,
+  parkingFloatingStyles,
+  payButtonStyles,
+  headerStyles,
+} from "../styles/map";
 import { colors, size } from "../theme";
 
 const Map = ({ currentPosition }) => {
@@ -21,10 +26,10 @@ const Map = ({ currentPosition }) => {
   const [activeModal, setActiveModal] = useState(null);
 
   const renderHeader = () => (
-    <View style={mapStyles.header}>
+    <View style={headerStyles.header}>
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <Text style={mapStyles.headerTitle}>Detected location</Text>
-        <Text style={mapStyles.headerLocation}>San Francisco, US</Text>
+        <Text style={headerStyles.headerTitle}>Detected location</Text>
+        <Text style={headerStyles.headerLocation}>San Francisco, US</Text>
       </View>
       <View
         style={{ flex: 1, justifyContent: "center", alignItems: "flex-end" }}
@@ -51,15 +56,15 @@ const Map = ({ currentPosition }) => {
         key={`parking-${parking.id}}`}
         onPress={() => setActive(parking.id)}
       >
-        <View style={[mapStyles.parking, mapStyles.shadow]}>
-          <View style={mapStyles.hours}>
-            <Text style={mapStyles.hoursTitle}>
+        <View style={[parkingFloatingStyles.parking, mapStyles.shadow]}>
+          <View style={parkingFloatingStyles.hours}>
+            <Text style={parkingFloatingStyles.hoursTitle}>
               x {parking.spots} {parking.title}
             </Text>
           </View>
-          <View style={mapStyles.parkingInfoContainer}>
-            <View style={mapStyles.parkingInfo}>
-              <View style={mapStyles.parkingIcon}>
+          <View style={parkingFloatingStyles.parkingInfoContainer}>
+            <View style={parkingFloatingStyles.parkingInfo}>
+              <View style={parkingFloatingStyles.parkingIcon}>
                 <Ionicons
                   name="ios-pricetag"
                   size={size.icon}
@@ -67,7 +72,7 @@ const Map = ({ currentPosition }) => {
                 />
                 <Text style={{ marginLeft: size.base }}>${parking.price}</Text>
               </View>
-              <View style={mapStyles.parkingIcon}>
+              <View style={parkingFloatingStyles.parkingIcon}>
                 <Ionicons
                   name="ios-star"
                   size={size.icon}
@@ -77,18 +82,18 @@ const Map = ({ currentPosition }) => {
               </View>
             </View>
             <TouchableOpacity
-              style={mapStyles.buyContainer}
+              style={payButtonStyles.payContainer}
               onPress={() => setActiveModal(parking)}
             >
-              <View style={mapStyles.buyTotal}>
-                <Text style={mapStyles.buyTotalPrice}>
+              <View style={payButtonStyles.payTotal}>
+                <Text style={payButtonStyles.payTotalPrice}>
                   ${parking.price * hours}
                 </Text>
                 <Text style={{ color: colors.white }}>
                   {parking.price}x{hours} hrs
                 </Text>
               </View>
-              <View style={mapStyles.buyIcon}>
+              <View style={payButtonStyles.payIcon}>
                 <FontAwesome
                   name="angle-right"
                   size={size.icon * 1.75}
@@ -109,109 +114,13 @@ const Map = ({ currentPosition }) => {
       showsHorizontalScrollIndicator={false}
       scrollEventThrottle={16}
       snapToAlignment="center"
-      style={mapStyles.parkings}
+      style={parkingFloatingStyles.parkingsListContainer}
       horizontal
       renderItem={({ item }) => renderParking(item)}
       keyExtractor={(item, index) => `${item.id}`}
       data={parkings}
     />
   );
-
-  const renderModal = () => {
-    if (!activeModal) return null;
-    return (
-      <Modal
-        isVisible
-        useNativeDriver
-        onBackButtonPress={() => setActiveModal(null)}
-        onBackdropPress={() => setActiveModal(null)}
-        onSwipeComplete={() => setActiveModal(null)}
-        style={mapStyles.modalContainer}
-      >
-        <View style={mapStyles.modal}>
-          <View>
-            <Text style={{ fontSize: size.font * 1.5 }}>
-              {activeModal.title}
-            </Text>
-          </View>
-          <View style={{ paddingVertical: size.base }}>
-            <Text
-              style={{ fontSize: size.font * 1.1, color: colors.primaryGrey }}
-            >
-              {activeModal.description}
-            </Text>
-          </View>
-          <View style={mapStyles.modalInfo}>
-            <View
-              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
-            >
-              <Ionicons
-                name="ios-pricetag"
-                size={size.icon * 1.1}
-                color={colors.primaryGrey}
-              />
-              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
-                ${activeModal.price}
-              </Text>
-            </View>
-            <View
-              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
-            >
-              <Ionicons
-                name="ios-star"
-                size={size.icon * 1.1}
-                color={colors.primaryGrey}
-              />
-              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
-                {activeModal.rating}
-              </Text>
-            </View>
-            <View
-              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
-            >
-              <Ionicons
-                name="ios-pin"
-                size={size.icon * 1.1}
-                color={colors.primaryGrey}
-              />
-              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
-                {activeModal.distance}km
-              </Text>
-            </View>
-            <View
-              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
-            >
-              <Ionicons
-                name="ios-car"
-                size={size.icon * 1.1}
-                color={colors.primaryGrey}
-              />
-              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
-                {activeModal.free}/{activeModal.spots}
-              </Text>
-            </View>
-          </View>
-          <View style={mapStyles.modalHours}>
-            <Text style={{ textAlign: "center", fontWeight: "500" }}>
-              Choose your Booking Period:
-            </Text>
-          </View>
-          <View>
-            <TouchableOpacity style={mapStyles.btnPay}>
-              <Text style={mapStyles.payText}>
-                Proceed to pay ${activeModal.price * hours * activeModal.id}
-              </Text>
-              <FontAwesome
-                name="angle-right"
-                size={size.icon * 1.75}
-                color={colors.white}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-    );
-  };
 
   return (
     <View style={mapStyles.container}>
@@ -240,7 +149,11 @@ const Map = ({ currentPosition }) => {
         ))}
       </MapView>
       {renderParkings()}
-      {renderModal()}
+      <Modal
+        hours={hours}
+        activeModal={activeModal}
+        setActiveModal={setActiveModal}
+      />
     </View>
   );
 };
