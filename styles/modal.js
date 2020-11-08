@@ -18,7 +18,7 @@ const modalStyles = StyleSheet.create({
   },
   modalInfo: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     borderTopColor: colors.secondaryGrey,
     borderBottomColor: colors.secondaryGrey,
     borderTopWidth: 1,
