@@ -129,20 +129,25 @@ const Map = () => {
       >
         {parkingData.map((parking) => (
           <Marker key={`marker-${parking.id}`} coordinate={parking.coordinate}>
-            <View
-              style={[
-                mapStyles.marker,
-                mapStyles.shadow,
-                active === parking.id ? mapStyles.active : null,
-              ]}
+            <TouchableWithoutFeedback
+              key={`parking-${parking.id}}`}
+              onPress={() => setActive(parking.id)}
             >
-              <Text style={{ color: "#B40B15", fontWeight: "bold" }}>
-                ${parking.price}
-              </Text>
-              <Text style={{ color: "#7D818A", paddingLeft: 4 }}>
-                ({parking.free}/{parking.spots})
-              </Text>
-            </View>
+              <View
+                style={[
+                  mapStyles.marker,
+                  mapStyles.shadow,
+                  active === parking.id ? mapStyles.active : null,
+                ]}
+              >
+                <Text style={{ color: "#B40B15", fontWeight: "bold" }}>
+                  ${parking.price}
+                </Text>
+                <Text style={{ color: "#7D818A", paddingLeft: 4 }}>
+                  ({parking.free}/{parking.spots})
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           </Marker>
         ))}
       </MapView>

@@ -42,6 +42,8 @@ export const mapStyles = StyleSheet.create({
     borderRadius: 24,
     paddingVertical: 12,
     paddingHorizontal: 24,
+    borderWidth: 1,
+    borderColor: "#FFF",
   },
   shadow: {
     shadowColor: "#000",
@@ -54,6 +56,5 @@ export const mapStyles = StyleSheet.create({
   },
   active: {
     borderColor: "#B40B15",
-    borderWidth: 0.5,
   }
 });
