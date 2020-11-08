@@ -9,8 +9,11 @@ export const mapStyles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   header: {
-    flex: 0.5,
     justifyContent: "center",
+    paddingHorizontal: size.base * 2,
+    paddingTop: size.base * 2.5,
+    paddingBottom: size.base * 1.5,
+    flexDirection: "row",
   },
   map: {
     flex: 3,
@@ -101,4 +104,12 @@ export const mapStyles = StyleSheet.create({
     color: colors.secondaryGrey,
     paddingLeft: 4,
   },
+  headerTitle: {
+    color: colors.primaryGrey
+  },
+  headerLocation: {
+    fontSize: size.font,
+    fontWeight: "500",
+    paddingVertical: size.base / 3
+  }
 });

@@ -20,7 +20,17 @@ const Map = ({ currentPosition }) => {
 
   const renderHeader = () => (
     <View style={mapStyles.header}>
-      <Text>Header</Text>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Text style={mapStyles.headerTitle}>Detected location</Text>
+        <Text style={mapStyles.headerLocation}>San Francisco, US</Text>
+      </View>
+      <View
+        style={{ flex: 1, justifyContent: "center", alignItems: "flex-end" }}
+      >
+        <TouchableWithoutFeedback>
+          <Ionicons name="ios-menu" size={size.icon * 1.5} />
+        </TouchableWithoutFeedback>
+      </View>
     </View>
   );
 
