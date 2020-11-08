@@ -6,6 +6,7 @@ export const convertCoordinates = (data) => {
     newFormatData.description = item.description;
     newFormatData.price = item.price;
     newFormatData.rating = item.rating;
+    newFormatData.distance = item.distance
     newFormatData.spots = item.spots;
     newFormatData.free = item.free;
     newFormatData.coordinate = {

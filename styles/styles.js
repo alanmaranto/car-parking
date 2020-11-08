@@ -33,11 +33,12 @@ export const mapStyles = StyleSheet.create({
     width: width - 24 * 2,
     flexDirection: "row",
   },
-  btnBuy: {
+  buyContainer: {
     flex: 1,
     flexDirection: "row",
     backgroundColor: colors.primaryRed,
-    padding: 12,
+    paddingHorizontal: size.base * 1.5,
+    paddingVertical: size.base,
     borderRadius: 6,
   },
   btnPay: {
@@ -81,15 +82,14 @@ export const mapStyles = StyleSheet.create({
     flexDirection: "row",
   },
   parkingInfo: {
-    flex: 0.5,
-    justifyContent: "center",
-    marginHorizontal: size.base * 2,
+    justifyContent: "space-evenly",
+    marginHorizontal: size.base * 1.5,
   },
   parkingIcon: {
     justifyContent: "space-between",
-    alignItems: "center",
+    // alignItems: "center",
     flexDirection: "row",
-    flex: 1,
+    // flex: 1,
   },
   buyTotal: {
     flex: 1,
@@ -98,7 +98,7 @@ export const mapStyles = StyleSheet.create({
   buyIcon: {
     flex: 0.5,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   buyTotalPrice: {
     fontSize: size.base * 2,
@@ -131,6 +131,15 @@ export const mapStyles = StyleSheet.create({
   modalContainer: {
     margin: 0,
     justifyContent: "flex-end",
+  },
+  modalInfo: {
+    flexDirection: "row",
+    justifyContent: 'space-evenly',
+    borderTopColor: colors.secondaryGrey,
+    borderBottomColor: colors.secondaryGrey,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    paddingVertical: size.base
   },
   modalHours: {
     paddingVertical: height * 0.11,

@@ -65,7 +65,7 @@ const Map = ({ currentPosition }) => {
                   size={size.icon}
                   color={colors.primaryGrey}
                 />
-                <Text>${parking.price}</Text>
+                <Text style={{ marginLeft: size.base }}>${parking.price}</Text>
               </View>
               <View style={mapStyles.parkingIcon}>
                 <Ionicons
@@ -73,11 +73,11 @@ const Map = ({ currentPosition }) => {
                   size={size.icon}
                   color={colors.primaryGrey}
                 />
-                <Text>{parking.rating}</Text>
+                <Text style={{ marginLeft: size.base }}>{parking.rating}</Text>
               </View>
             </View>
             <TouchableOpacity
-              style={mapStyles.btnBuy}
+              style={mapStyles.buyContainer}
               onPress={() => setActiveModal(parking)}
             >
               <View style={mapStyles.buyTotal}>
@@ -130,18 +130,66 @@ const Map = ({ currentPosition }) => {
       >
         <View style={mapStyles.modal}>
           <View>
-            <Text>{activeModal.title}</Text>
-          </View>
-          <View>
-            <Text>{activeModal.description}</Text>
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <Text>{activeModal.price}</Text>
-            <Text>{activeModal.rating}</Text>
-            <Text>{activeModal.distance}</Text>
-            <Text>
-              {activeModal.free}/{activeModal.total}
+            <Text style={{ fontSize: size.font * 1.5 }}>
+              {activeModal.title}
             </Text>
+          </View>
+          <View style={{ paddingVertical: size.base }}>
+            <Text
+              style={{ fontSize: size.font * 1.1, color: colors.primaryGrey }}
+            >
+              {activeModal.description}
+            </Text>
+          </View>
+          <View style={mapStyles.modalInfo}>
+            <View
+              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
+            >
+              <Ionicons
+                name="ios-pricetag"
+                size={size.icon * 1.1}
+                color={colors.primaryGrey}
+              />
+              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
+                ${activeModal.price}
+              </Text>
+            </View>
+            <View
+              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
+            >
+              <Ionicons
+                name="ios-star"
+                size={size.icon * 1.1}
+                color={colors.primaryGrey}
+              />
+              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
+                {activeModal.rating}
+              </Text>
+            </View>
+            <View
+              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
+            >
+              <Ionicons
+                name="ios-pin"
+                size={size.icon * 1.1}
+                color={colors.primaryGrey}
+              />
+              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
+                {activeModal.distance}km
+              </Text>
+            </View>
+            <View
+              style={[mapStyles.parkingIcon, { justifyContent: "flex-start" }]}
+            >
+              <Ionicons
+                name="ios-car"
+                size={size.icon * 1.1}
+                color={colors.primaryGrey}
+              />
+              <Text style={{ fontSize: size.icon * 1.15, paddingLeft: 6 }}>
+                {activeModal.free}/{activeModal.spots}
+              </Text>
+            </View>
           </View>
           <View style={mapStyles.modalHours}>
             <Text style={{ textAlign: "center", fontWeight: "500" }}>
