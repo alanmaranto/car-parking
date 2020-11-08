@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableWithoutFeedback,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import { parkings } from "../parkings";
 import { convertCoordinates } from "../helpers/map";
@@ -40,27 +40,14 @@ const Map = () => {
         onPress={() => setActive(parking.id)}
       >
         <View style={[mapStyles.parking, mapStyles.shadow]}>
-          <View style={{ flex: 1, flexDirection: "column" }}>
-            <Text style={{ fontSize: 16 }}>
+          <View style={mapStyles.hours}>
+            <Text style={mapStyles.hoursTitle}>
               x {parking.spots} {parking.title}
             </Text>
           </View>
-          <View style={{ flex: 1.5, flexDirection: "row" }}>
-            <View
-              style={{
-                flex: 0.5,
-                justifyContent: "center",
-                marginHorizontal: size.base * 2,
-              }}
-            >
-              <View
-                style={{
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  flex: 1,
-                }}
-              >
+          <View style={mapStyles.parkingInfoContainer}>
+            <View style={mapStyles.parkingInfo}>
+              <View style={mapStyles.parkingIcon}>
                 <Ionicons
                   name="ios-pricetag"
                   size={size.icon}
@@ -68,14 +55,7 @@ const Map = () => {
                 />
                 <Text>${parking.price}</Text>
               </View>
-              <View
-                style={{
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  flex: 1,
-                }}
-              >
+              <View style={mapStyles.parkingIcon}>
                 <Ionicons
                   name="ios-star"
                   size={size.icon}
@@ -85,24 +65,20 @@ const Map = () => {
               </View>
             </View>
             <TouchableOpacity style={mapStyles.btnBuy}>
-              <View style={{ flex: 1, justifyContent: "center" }}>
-                <Text style={{ fontSize: size.base * 2, color: colors.white }}>
+              <View style={mapStyles.buyTotal}>
+                <Text style={mapStyles.buyTotalPrice}>
                   ${parking.price * hours}
                 </Text>
                 <Text style={{ color: colors.white }}>
                   {parking.price}x{hours} hrs
                 </Text>
               </View>
-              <View
-                style={{
-                  flex: 0.5,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: size.base * 2, color: colors.white }}>
-                  >
-                </Text>
+              <View style={mapStyles.buyIcon}>
+                <FontAwesome
+                  name="angle-right"
+                  size={size.icon * 1.75}
+                  color={colors.white}
+                />
               </View>
             </TouchableOpacity>
           </View>
@@ -151,12 +127,8 @@ const Map = () => {
                   active === parking.id ? mapStyles.active : null,
                 ]}
               >
-                <Text
-                  style={{ color: colors.secondaryRed, fontWeight: "bold" }}
-                >
-                  ${parking.price}
-                </Text>
-                <Text style={{ color: colors.secondaryGrey, paddingLeft: 4 }}>
+                <Text style={mapStyles.markerPrice}>${parking.price}</Text>
+                <Text style={mapStyles.markerStatus}>
                   ({parking.free}/{parking.spots})
                 </Text>
               </View>

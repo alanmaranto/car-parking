@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { colors } from "../theme";
+import { colors, size } from "../theme";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -20,7 +20,7 @@ export const mapStyles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    paddingBottom: 24
+    paddingBottom: 24,
   },
   parking: {
     backgroundColor: colors.white,
@@ -57,5 +57,48 @@ export const mapStyles = StyleSheet.create({
   },
   active: {
     borderColor: colors.primaryRed,
-  }
+  },
+  hours: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  hoursTitle: {
+    fontSize: size.font,
+  },
+  parkingInfoContainer: {
+    flex: 1.5,
+    flexDirection: "row",
+  },
+  parkingInfo: {
+    flex: 0.5,
+    justifyContent: "center",
+    marginHorizontal: size.base * 2,
+  },
+  parkingIcon: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    flex: 1,
+  },
+  buyTotal: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  buyIcon: {
+    flex: 0.5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buyTotalPrice: {
+    fontSize: size.base * 2,
+    color: colors.white,
+  },
+  markerPrice: {
+    color: colors.secondaryRed,
+    fontWeight: "bold",
+  },
+  markerStatus: {
+    color: colors.secondaryGrey,
+    paddingLeft: 4,
+  },
 });
