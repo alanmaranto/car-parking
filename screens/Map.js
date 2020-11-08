@@ -13,7 +13,7 @@ import { convertCoordinates } from "../helpers/map";
 import { mapStyles } from "../styles/styles";
 import { colors, size } from "../theme";
 
-const Map = () => {
+const Map = ({ currentPosition }) => {
   const [hours, setHours] = useState(1);
   const [parkingData, setParkingData] = useState([]);
   const [active, setActive] = useState(null);
@@ -105,15 +105,7 @@ const Map = () => {
   return (
     <View style={mapStyles.container}>
       {renderHeader()}
-      <MapView
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0122,
-          longitudeDelta: 0.0121,
-        }}
-        style={mapStyles.map}
-      >
+      <MapView initialRegion={currentPosition} style={mapStyles.map}>
         {parkingData.map((parking) => (
           <Marker key={`marker-${parking.id}`} coordinate={parking.coordinate}>
             <TouchableWithoutFeedback
@@ -139,6 +131,15 @@ const Map = () => {
       {renderParkings()}
     </View>
   );
+};
+
+Map.defaultProps = {
+  currentPosition: {
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0122,
+    longitudeDelta: 0.0121,
+  },
 };
 
 export default Map;
