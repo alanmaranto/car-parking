@@ -1,27 +1,36 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { parkings } from "../parkings";
+import { convertCoordinates } from '../helpers/map'
 import { mapStyles } from "../styles/styles";
 
 const Map = () => {
   const [hours, setHours] = useState(1);
+  const [parkingData, setParkingData] = useState([]);
+
   const renderHeader = () => (
     <View style={mapStyles.header}>
       <Text>Header</Text>
     </View>
   );
 
+  useEffect(() => {
+    const getParkingData = async () => {
+      const data = await convertCoordinates(parkings);
+      setParkingData(data);
+    };
+
+    getParkingData();
+  }, []);
+
   const renderParking = (parking) => {
     return (
-      <View key={`parking-${parking.id}}`} style={mapStyles.parking}>
+      <View
+        key={`parking-${parking.id}}`}
+        style={[mapStyles.parking, mapStyles.shadow]}
+      >
         <View style={{ flex: 1, flexDirection: "column" }}>
           <Text style={{ fontSize: 16 }}>
             x {parking.spots} {parking.title}
@@ -104,11 +113,24 @@ const Map = () => {
         initialRegion={{
           latitude: 37.78825,
           longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 0.0122,
+          longitudeDelta: 0.0121,
         }}
         style={mapStyles.map}
-      />
+      >
+        {parkingData.map((parking) => (
+          <Marker key={`marker-${parking.id}`} coordinate={parking.coordinate}>
+            <View style={[mapStyles.marker, mapStyles.shadow]}>
+              <Text style={{ color: "#B40B15", fontWeight: "bold" }}>
+                ${parking.price}
+              </Text>
+              <Text style={{ color: "#7D818A", paddingLeft: 4 }}>
+                ({parking.free}/{parking.spots})
+              </Text>
+            </View>
+          </Marker>
+        ))}
+      </MapView>
       {renderParkings()}
     </View>
   );

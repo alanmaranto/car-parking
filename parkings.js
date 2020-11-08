@@ -15,7 +15,7 @@ export const parkings = [
     rating: 4.1,
     spots: 30,
     free: 20,
-    location: { lat: 37.78825, lng: -122.4315 },
+    location: { lat: 37.78835, lng: -122.4315 },
   },
   {
     id: 3,
@@ -24,6 +24,6 @@ export const parkings = [
     rating: 4.9,
     spots: 40,
     free: 15,
-    location: { lat: 37.71025, lng: -122.4825 },
+    location: { lat: 37.71045, lng: -122.4825 },
   },
 ];
