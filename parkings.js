@@ -2,9 +2,7 @@ export const parkings = [
   {
     id: 1,
     title: "Parking 1",
-    description: `Description about this parking lot.
-    Open year 2020.
-    Secure with CTV`,
+    description: 'Description about this parking lot. Open year 2020. with CTV',
     price: 5,
     rating: 4.2,
     distance: 2.9,
@@ -15,9 +13,7 @@ export const parkings = [
   {
     id: 2,
     title: "Parking 2",
-    description: `Description about this parking lot.
-    Open year 2020.
-    Secure with CTV`,
+    description: 'Description about this parking lot. Open year 2020. Secure with CTV',
     price: 7,
     rating: 4.1,
     distance: 2.1,
@@ -28,9 +24,7 @@ export const parkings = [
   {
     id: 3,
     title: "Parking 3",
-    description: `Description about this parking lot.
-    Open year 2020.
-    Secure with CTV`,
+    description: 'Description about this parking lot. Open year 2020. Secure with CTV, Description about this parking lot. Open year 2020. Secure with CTV Description about this parking lot. Open year 2020. Secure with CTV Description about this parking lot. Open year 2020. Secure with CTV',
     price: 10,
     rating: 4.9,
     distance: 0.2,

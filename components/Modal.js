@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Modal from "react-native-modal";
 import {
@@ -24,13 +24,17 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
         <View>
           <Text style={{ fontSize: size.font * 1.5 }}>{activeModal.title}</Text>
         </View>
-        <View style={{ paddingVertical: size.base }}>
-          <Text
-            style={{ fontSize: size.font * 1.1, color: colors.primaryGrey }}
-          >
-            {activeModal.description}
-          </Text>
+        {/* <ScrollView> */}
+        <View style={{ paddingVertical: size.base, flex: 0.5 }}>
+          <ScrollView>
+            <Text
+              style={{ fontSize: size.font * 1.1, color: colors.primaryGrey }}
+            >
+              {activeModal.description}
+            </Text>
+          </ScrollView>
         </View>
+        {/* </ScrollView> */}
         <View style={modalStyles.modalInfo}>
           <View
             style={[
@@ -44,7 +48,7 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
               color={colors.primaryGrey}
             />
             <Text style={{ fontSize: size.icon * 1.15 }}>
-                {" "}
+              {" "}
               ${activeModal.price}
             </Text>
           </View>
@@ -59,8 +63,8 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
               size={size.icon * 1.1}
               color={colors.primaryGrey}
             />
-            <Text style={{ fontSize: size.icon * 1.15}}>
-                {" "}
+            <Text style={{ fontSize: size.icon * 1.15 }}>
+              {" "}
               {activeModal.rating}
             </Text>
           </View>
@@ -75,8 +79,8 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
               size={size.icon * 1.1}
               color={colors.primaryGrey}
             />
-            <Text style={{ fontSize: size.icon * 1.15}}>
-                {" "}
+            <Text style={{ fontSize: size.icon * 1.15 }}>
+              {" "}
               {activeModal.distance}km
             </Text>
           </View>
@@ -91,8 +95,8 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
               size={size.icon * 1.1}
               color={colors.primaryGrey}
             />
-            <Text style={{ fontSize: size.icon * 1.15}}>
-                {" "}
+            <Text style={{ fontSize: size.icon * 1.15 }}>
+              {" "}
               {activeModal.free}/{activeModal.spots}
             </Text>
           </View>
