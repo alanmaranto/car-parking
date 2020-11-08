@@ -1,11 +1,12 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { colors } from "../theme";
 
 const { width, height } = Dimensions.get("screen");
 
 export const mapStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.white,
   },
   header: {
     flex: 0.5,
@@ -22,7 +23,7 @@ export const mapStyles = StyleSheet.create({
     paddingBottom: 24
   },
   parking: {
-    backgroundColor: "#FFF",
+    backgroundColor: colors.white,
     borderRadius: 6,
     padding: 24,
     marginHorizontal: 12,
@@ -32,21 +33,21 @@ export const mapStyles = StyleSheet.create({
   btnBuy: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "#B40B15",
+    backgroundColor: colors.primaryRed,
     padding: 12,
     borderRadius: 6,
   },
   marker: {
     flexDirection: "row",
-    backgroundColor: "#FFF",
+    backgroundColor: colors.white,
     borderRadius: 24,
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderWidth: 1,
-    borderColor: "#FFF",
+    borderColor: colors.white,
   },
   shadow: {
-    shadowColor: "#000",
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 6,
@@ -55,6 +56,6 @@ export const mapStyles = StyleSheet.create({
     shadowRadius: 4,
   },
   active: {
-    borderColor: "#B40B15",
+    borderColor: colors.primaryRed,
   }
 });

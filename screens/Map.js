@@ -11,6 +11,7 @@ import MapView, { Marker } from "react-native-maps";
 import { parkings } from "../parkings";
 import { convertCoordinates } from "../helpers/map";
 import { mapStyles } from "../styles/styles";
+import { colors, size } from "../theme";
 
 const Map = () => {
   const [hours, setHours] = useState(1);
@@ -49,7 +50,7 @@ const Map = () => {
               style={{
                 flex: 0.5,
                 justifyContent: "center",
-                marginHorizontal: 24,
+                marginHorizontal: size.base * 2,
               }}
             >
               <View
@@ -60,7 +61,11 @@ const Map = () => {
                   flex: 1,
                 }}
               >
-                <Ionicons name="ios-pricetag" size={16} color="#7D818A" />
+                <Ionicons
+                  name="ios-pricetag"
+                  size={size.icon}
+                  color={colors.primaryGrey}
+                />
                 <Text>${parking.price}</Text>
               </View>
               <View
@@ -71,16 +76,20 @@ const Map = () => {
                   flex: 1,
                 }}
               >
-                <Ionicons name="ios-star" size={16} color="#7D818A" />
+                <Ionicons
+                  name="ios-star"
+                  size={size.icon}
+                  color={colors.primaryGrey}
+                />
                 <Text>{parking.rating}</Text>
               </View>
             </View>
             <TouchableOpacity style={mapStyles.btnBuy}>
               <View style={{ flex: 1, justifyContent: "center" }}>
-                <Text style={{ fontSize: 24, color: "white" }}>
+                <Text style={{ fontSize: size.base * 2, color: colors.white }}>
                   ${parking.price * hours}
                 </Text>
-                <Text style={{ color: "white" }}>
+                <Text style={{ color: colors.white }}>
                   {parking.price}x{hours} hrs
                 </Text>
               </View>
@@ -91,7 +100,9 @@ const Map = () => {
                   alignItems: "center",
                 }}
               >
-                <Text style={{ fontSize: 24, color: "white" }}>></Text>
+                <Text style={{ fontSize: size.base * 2, color: colors.white }}>
+                  >
+                </Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -140,10 +151,12 @@ const Map = () => {
                   active === parking.id ? mapStyles.active : null,
                 ]}
               >
-                <Text style={{ color: "#B40B15", fontWeight: "bold" }}>
+                <Text
+                  style={{ color: colors.secondaryRed, fontWeight: "bold" }}
+                >
                   ${parking.price}
                 </Text>
-                <Text style={{ color: "#7D818A", paddingLeft: 4 }}>
+                <Text style={{ color: colors.secondaryGrey, paddingLeft: 4 }}>
                   ({parking.free}/{parking.spots})
                 </Text>
               </View>
