@@ -52,4 +52,8 @@ export const mapStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
+  active: {
+    borderColor: "#B40B15",
+    borderWidth: 0.5,
+  }
 });
