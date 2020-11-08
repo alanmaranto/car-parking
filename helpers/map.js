@@ -3,6 +3,7 @@ export const convertCoordinates = (data) => {
     const newFormatData = {};
     newFormatData.id = item.id;
     newFormatData.title = item.title;
+    newFormatData.description = item.description;
     newFormatData.price = item.price;
     newFormatData.rating = item.rating;
     newFormatData.spots = item.spots;

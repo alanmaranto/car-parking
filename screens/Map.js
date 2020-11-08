@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
+import Modal from "react-native-modal";
 import { parkings } from "../parkings";
 import { convertCoordinates } from "../helpers/map";
 import { mapStyles } from "../styles/styles";
@@ -17,6 +18,7 @@ const Map = ({ currentPosition }) => {
   const [hours, setHours] = useState(1);
   const [parkingData, setParkingData] = useState([]);
   const [active, setActive] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
 
   const renderHeader = () => (
     <View style={mapStyles.header}>
@@ -74,7 +76,10 @@ const Map = ({ currentPosition }) => {
                 <Text>{parking.rating}</Text>
               </View>
             </View>
-            <TouchableOpacity style={mapStyles.btnBuy}>
+            <TouchableOpacity
+              style={mapStyles.btnBuy}
+              onPress={() => setActiveModal(parking)}
+            >
               <View style={mapStyles.buyTotal}>
                 <Text style={mapStyles.buyTotalPrice}>
                   ${parking.price * hours}
@@ -112,6 +117,54 @@ const Map = ({ currentPosition }) => {
     />
   );
 
+  const renderModal = () => {
+    if (!activeModal) return null;
+    return (
+      <Modal
+        isVisible
+        useNativeDriver
+        onBackButtonPress={() => setActiveModal(null)}
+        onBackdropPress={() => setActiveModal(null)}
+        onSwipeComplete={() => setActiveModal(null)}
+        style={mapStyles.modalContainer}
+      >
+        <View style={mapStyles.modal}>
+          <View>
+            <Text>{activeModal.title}</Text>
+          </View>
+          <View>
+            <Text>{activeModal.description}</Text>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            <Text>{activeModal.price}</Text>
+            <Text>{activeModal.rating}</Text>
+            <Text>{activeModal.distance}</Text>
+            <Text>
+              {activeModal.free}/{activeModal.total}
+            </Text>
+          </View>
+          <View style={mapStyles.modalHours}>
+            <Text style={{ textAlign: "center", fontWeight: "500" }}>
+              Choose your Booking Period:
+            </Text>
+          </View>
+          <View>
+            <TouchableOpacity style={mapStyles.btnPay}>
+              <Text style={mapStyles.payText}>
+                Proceed to pay ${activeModal.price * hours * activeModal.id}
+              </Text>
+              <FontAwesome
+                name="angle-right"
+                size={size.icon * 1.75}
+                color={colors.white}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
+
   return (
     <View style={mapStyles.container}>
       {renderHeader()}
@@ -139,6 +192,7 @@ const Map = ({ currentPosition }) => {
         ))}
       </MapView>
       {renderParkings()}
+      {renderModal()}
     </View>
   );
 };

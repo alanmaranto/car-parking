@@ -40,6 +40,14 @@ export const mapStyles = StyleSheet.create({
     padding: 12,
     borderRadius: 6,
   },
+  btnPay: {
+    flexDirection: "row",
+    backgroundColor: colors.primaryRed,
+    padding: size.base * 1.5,
+    borderRadius: 6,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   marker: {
     flexDirection: "row",
     backgroundColor: colors.white,
@@ -105,11 +113,31 @@ export const mapStyles = StyleSheet.create({
     paddingLeft: 4,
   },
   headerTitle: {
-    color: colors.primaryGrey
+    color: colors.primaryGrey,
   },
   headerLocation: {
     fontSize: size.font,
     fontWeight: "500",
-    paddingVertical: size.base / 3
-  }
+    paddingVertical: size.base / 3,
+  },
+  modal: {
+    backgroundColor: colors.white,
+    flexDirection: "column",
+    height: height * 0.75,
+    padding: size.base * 2,
+    borderTopLeftRadius: size.base,
+    borderTopRightRadius: size.base,
+  },
+  modalContainer: {
+    margin: 0,
+    justifyContent: "flex-end",
+  },
+  modalHours: {
+    paddingVertical: height * 0.11,
+  },
+  payText: {
+    color: colors.white,
+    fontSize: size.base * 1.5,
+    fontWeight: "600",
+  },
 });
