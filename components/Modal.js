@@ -24,17 +24,15 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
         <View>
           <Text style={{ fontSize: size.font * 1.5 }}>{activeModal.title}</Text>
         </View>
-        {/* <ScrollView> */}
-        <View style={{ paddingVertical: size.base, flex: 0.5 }}>
+        <View style={{ paddingVertical: size.base * 2, flex: 0.5 }}>
           <ScrollView>
             <Text
-              style={{ fontSize: size.font * 1.1, color: colors.primaryGrey }}
+              style={{ fontSize: size.font * 1.1, color: colors.primaryGrey, lineHeight: 25 }}
             >
               {activeModal.description}
             </Text>
           </ScrollView>
         </View>
-        {/* </ScrollView> */}
         <View style={modalStyles.modalInfo}>
           <View
             style={[
