@@ -9,7 +9,13 @@ import {
 } from "../styles";
 import { colors, size } from "../theme";
 
-const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
+const ModalScreen = ({
+  hours,
+  activeModal,
+  setActiveModal,
+  setHours,
+  renderHours,
+}) => {
   if (!activeModal) return null;
   return (
     <Modal
@@ -24,10 +30,14 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
         <View>
           <Text style={{ fontSize: size.font * 1.5 }}>{activeModal.title}</Text>
         </View>
-        <View style={{ paddingVertical: size.base * 2, flex: 0.5 }}>
+        <View style={{ paddingTop: size.base, flex: 1 }}>
           <ScrollView>
             <Text
-              style={{ fontSize: size.font * 1.1, color: colors.primaryGrey, lineHeight: 25 }}
+              style={{
+                fontSize: size.font * 1.1,
+                color: colors.primaryGrey,
+                lineHeight: 25,
+              }}
             >
               {activeModal.description}
             </Text>
@@ -103,11 +113,12 @@ const ModalScreen = ({ hours, activeModal, setActiveModal }) => {
           <Text style={{ textAlign: "center", fontWeight: "500" }}>
             Choose your Booking Period:
           </Text>
+          <View style={modalStyles.modalHoursDropdown}>{renderHours()}</View>
         </View>
-        <View>
+        <View style={{ paddingTop: 50}}>
           <TouchableOpacity style={payButtonModalStyles.payBtn}>
             <Text style={payButtonModalStyles.payText}>
-              Proceed to pay ${activeModal.price * hours * activeModal.id}
+              Proceed to pay ${activeModal.price * hours}
             </Text>
             <FontAwesome
               name="angle-right"

@@ -125,9 +125,26 @@ const payButtonStyles = StyleSheet.create({
   },
 });
 
+const dropdownStyles = StyleSheet.create({
+  inputIOS: {
+    borderRadius: size.base / 2,
+    borderColor: colors.primaryGrey,
+    borderWidth: 1,
+    padding: size.base,
+    marginRight: size.base / 2,
+  },
+  inputAndroid: {
+    borderRadius: size.base / 2,
+    borderColor: colors.primaryRed,
+    borderWidth: 1,
+    padding: size.base,
+  },
+});
+
 module.exports = {
   mapStyles,
   parkingFloatingStyles,
   payButtonStyles,
   headerStyles,
+  dropdownStyles,
 };

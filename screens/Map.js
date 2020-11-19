@@ -9,18 +9,21 @@ import {
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import MapView, { Marker } from "react-native-maps";
 import Modal from "../components/Modal";
+import RNPicker from "react-native-picker-select";
 import { parkings } from "../parkings";
 import { convertCoordinates } from "../helpers/map";
+import { hoursOptions } from "./hours";
 import {
   mapStyles,
   parkingFloatingStyles,
   payButtonStyles,
   headerStyles,
+  dropdownStyles,
 } from "../styles/map";
 import { colors, size } from "../theme";
 
 const Map = ({ currentPosition }) => {
-  const [hours, setHours] = useState(1);
+  const [hours, setHours] = useState(null);
   const [parkingData, setParkingData] = useState([]);
   const [active, setActive] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
@@ -50,6 +53,24 @@ const Map = ({ currentPosition }) => {
     getParkingData();
   }, []);
 
+  const renderHours = () => {
+    return (
+      <>
+        <RNPicker
+          style={dropdownStyles}
+          placeholder={{
+            label: "Select the hours",
+            value: null,
+          }}
+          onValueChange={(value) => setHours(value)}
+          items={hoursOptions}
+          value={hours}
+        />
+        <Text style={{ color: "black" }}>hrs</Text>
+      </>
+    );
+  };
+
   const renderParking = (parking) => {
     return (
       <TouchableWithoutFeedback
@@ -61,6 +82,9 @@ const Map = ({ currentPosition }) => {
             <Text style={parkingFloatingStyles.hoursTitle}>
               x {parking.spots} {parking.title}
             </Text>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {renderHours()}
+            </View>
           </View>
           <View style={parkingFloatingStyles.parkingInfoContainer}>
             <View style={parkingFloatingStyles.parkingInfo}>
@@ -86,9 +110,16 @@ const Map = ({ currentPosition }) => {
               onPress={() => setActiveModal(parking)}
             >
               <View style={payButtonStyles.payTotal}>
-                <Text style={payButtonStyles.payTotalPrice}>
-                  ${parking.price * hours}
-                </Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <FontAwesome
+                    name="dollar"
+                    size={size.icon * 1.25}
+                    color={colors.white}
+                  />
+                  <Text style={payButtonStyles.payTotalPrice}>
+                    {parking.price * hours}
+                  </Text>
+                </View>
                 <Text style={{ color: colors.white }}>
                   {parking.price}x{hours} hrs
                 </Text>
@@ -153,6 +184,8 @@ const Map = ({ currentPosition }) => {
         hours={hours}
         activeModal={activeModal}
         setActiveModal={setActiveModal}
+        setHours={setHours}
+        renderHours={renderHours}
       />
     </View>
   );

@@ -26,7 +26,14 @@ const modalStyles = StyleSheet.create({
     paddingVertical: size.base,
   },
   modalHours: {
-    paddingVertical: height * 0.11,
+    paddingTop: height * 0.11,
+    paddingBottom: height * 0.15,
+  },
+  modalHoursDropdown: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: 'center',
+    paddingVertical: size.base
   },
 });
 

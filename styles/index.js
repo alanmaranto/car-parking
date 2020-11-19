@@ -4,6 +4,7 @@ import {
   parkingFloatingStyles,
   payButtonStyles,
   headerStyles,
+  dropdownStyles
 } from "./map";
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
   payButtonStyles,
   payButtonModalStyles,
   headerStyles,
+  dropdownStyles
 };
